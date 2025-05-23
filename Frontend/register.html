@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Register Patient</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Register New Patient</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <form id="registerForm">
+      <input type="text" name="full_name" placeholder="Full Name" required>
+      <input type="number" name="age" placeholder="Age" required>
+      <select name="gender" required>
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <input type="date" name="admission_date" required>
+      <input type="text" name="room_no" placeholder="Room Number">
+      <input type="text" name="legal_status" placeholder="Legal Status">
+      <label><input type="checkbox" name="is_asylum"> Is Asylum Patient</label>
+      <button type="submit">Register</button>
+    </form>
+  </main>
+
+  <!-- Script section at bottom -->
+  <script>
+    async function postData(endpoint, data) {
+      try {
+        const response = await fetch(`http://localhost:3000/${endpoint}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+          throw new Error("Failed to submit");
+        }
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((v, k) => data[k] = v);
+      data["is_asylum"] = e.target.is_asylum.checked;
+      await postData("patients", data);
+      alert("Patient registered.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

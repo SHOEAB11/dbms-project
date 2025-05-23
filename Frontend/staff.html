@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Staff</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Staff Members</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="staffTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Role</th><th>Specialization</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/staff.js"></script>
+  <script>
+    fetchData("staff").then(data => {
+      const tbody = document.querySelector("#staffTable tbody");
+      data.forEach(s => {
+        const row = `<tr>
+          <td>${s.staff_id}</td>
+          <td>${s.full_name}</td>
+          <td>${s.role}</td>
+          <td>${s.specialization}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

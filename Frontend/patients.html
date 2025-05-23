@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Patients</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Patients</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="patientsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/patients.js"></script>
+  <script>
+    fetchData("patients").then(data => {
+      const tbody = document.querySelector("#patientsTable tbody");
+      data.forEach(p => {
+        const row = `<tr>
+          <td>${p.patient_id}</td>
+          <td>${p.full_name}</td>
+          <td>${p.age}</td>
+          <td>${p.gender}</td>
+          <td>${p.status}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

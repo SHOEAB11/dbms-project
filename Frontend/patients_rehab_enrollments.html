@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rehab Enrollments</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Patient Rehab Enrollments</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="enrollmentsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Patient</th><th>Program</th><th>Enrollment Date</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script>
+    fetchData("patient_rehab_enrollments").then(data => {
+      const tbody = document.querySelector("#enrollmentsTable tbody");
+      data.forEach(e => {
+        const row = `<tr>
+          <td>${e.enrollment_id}</td>
+          <td>${e.patient_id}</td>
+          <td>${e.program_id}</td>
+          <td>${e.enrollment_date}</td>
+          <td>${e.status}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

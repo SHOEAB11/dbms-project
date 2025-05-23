@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Logs</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Admin Logs</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="adminLogsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Staff</th><th>Type</th><th>Description</th><th>Time</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/admin_logs.js"></script>
+  <script>
+    fetchData("admin_logs").then(data => {
+      const tbody = document.querySelector("#adminLogsTable tbody");
+      data.forEach(log => {
+        const row = `<tr>
+          <td>${log.log_id}</td>
+          <td>${log.staff_id}</td>
+          <td>${log.log_type}</td>
+          <td>${log.description}</td>
+          <td>${new Date(log.log_time).toLocaleString()}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

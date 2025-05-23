@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Activities</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Patient Activities</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="activitiesTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Patient</th><th>Staff</th><th>Type</th><th>Time</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/activities.js"></script>
+  <script>
+    fetchData("activities").then(data => {
+      const tbody = document.querySelector("#activitiesTable tbody");
+      data.forEach(act => {
+        const row = `<tr>
+          <td>${act.activity_id}</td>
+          <td>${act.patient_id}</td>
+          <td>${act.staff_id}</td>
+          <td>${act.activity_type}</td>
+          <td>${new Date(act.activity_time).toLocaleString()}</td>
+          <td>${act.status}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

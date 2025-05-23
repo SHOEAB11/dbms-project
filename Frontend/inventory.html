@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Inventory</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Type</th><th>Stock</th><th>Expiry</th><th>Patient</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/inventory.js"></script>
+  <script>
+    fetchData("inventory").then(data => {
+      const tbody = document.querySelector("#inventoryTable tbody");
+      data.forEach(item => {
+        const row = `<tr>
+          <td>${item.item_id}</td>
+          <td>${item.item_name}</td>
+          <td>${item.item_type}</td>
+          <td>${item.stock_level}</td>
+          <td>${item.expiry_date || "-"}</td>
+          <td>${item.patient_id || "-"}</td>
+          <td>${item.status}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

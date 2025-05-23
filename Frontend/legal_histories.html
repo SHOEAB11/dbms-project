@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Legal Histories</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Legal Histories</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="legalHistoriesTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Patient</th><th>Incident</th><th>Date</th><th>Reported By</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/legal_histories.js"></script>
+  <script>
+    fetchData("legal_histories").then(data => {
+      const tbody = document.querySelector("#legalHistoriesTable tbody");
+      data.forEach(h => {
+        const row = `<tr>
+          <td>${h.history_id}</td>
+          <td>${h.patient_id}</td>
+          <td>${h.incident_type}</td>
+          <td>${h.incident_date}</td>
+          <td>${h.reported_by}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

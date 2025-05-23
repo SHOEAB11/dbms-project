@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rehab Programs</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header><h2>Rehab Programs</h2></header>
+  <nav><a href="index.html">Back to Dashboard</a></nav>
+  <main>
+    <table id="programsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Type</th><th>Start</th><th>End</th><th>Created By</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="routes/rehab_programs.js"></script>
+  <script>
+    fetchData("rehab_programs").then(data => {
+      const tbody = document.querySelector("#programsTable tbody");
+      data.forEach(p => {
+        const row = `<tr>
+          <td>${p.program_id}</td>
+          <td>${p.program_name}</td>
+          <td>${p.program_type}</td>
+          <td>${p.start_date}</td>
+          <td>${p.end_date}</td>
+          <td>${p.created_by}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>
