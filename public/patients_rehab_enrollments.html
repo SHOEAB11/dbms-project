@@ -19,6 +19,14 @@
     </table>
   </main>
   <script>
+    function fetchData(resource) {
+      return fetch(`https://dbms-project-production-c3a7.up.railway.app/api/${resource}`)
+        .then(res => {
+          if (!res.ok) throw new Error('Network response was not ok');
+          return res.json();
+        });
+    }
+
     fetchData("patient_rehab_enrollments").then(data => {
       const tbody = document.querySelector("#enrollmentsTable tbody");
       data.forEach(e => {
