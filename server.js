@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/staff', require('./routes/staff'));
-app.use('/patients', require('./routes/patients'));
+const patientsRouter = require('./routes/patients');
 app.use('/rehab_programs', require('./routes/rehab_programs'));
 app.use('/appointments', require('./routes/appointments'));
 app.use('/activities', require('./routes/activities'));

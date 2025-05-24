@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-// POST /patients — Register new patient
+
 router.post("/", (req, res) => {
   const {
     full_name,
